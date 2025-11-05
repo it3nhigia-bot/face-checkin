@@ -1,8 +1,0 @@
-<script src="https://unpkg.com/html5-qrcode"></script>
-<div id="reader" style="width:500px"></div>
-<script>
-function onScanSuccess(decodedText) {
-  document.body.innerHTML = `<h1>Xin chào ${decodedText}</h1>`;
-}
-new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 }).render(onScanSuccess);
-</script>
