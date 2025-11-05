@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Check-in Nhị Gia</title>
+  <title>Face Check-in | Nhị Gia</title>
   <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
   <script defer src="script.js"></script>
   <style>
-    body { text-align: center; font-family: sans-serif; }
-    video { border: 2px solid #ccc; width: 500px; height: 375px; }
-    #status { margin-top: 20px; font-size: 1.2em; }
+    body { font-family: sans-serif; text-align: center; background: #fafafa; }
+    video { border-radius: 10px; margin-top: 20px; }
+    h1 { color: #222; }
   </style>
 </head>
 <body>
-  <h1>Check-in Nhị Gia</h1>
-  <video id="video" autoplay muted></video>
-  <div id="status">Đang khởi động...</div>
+  <h1>Face Check-in | Nhị Gia</h1>
+  <video id="video" width="640" height="480" autoplay muted></video>
+  <p id="status">Đang tải mô hình...</p>
 </body>
 </html>
