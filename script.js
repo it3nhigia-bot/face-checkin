@@ -1,22 +1,37 @@
 const video = document.getElementById('video');
+const statusDiv = document.getElementById('status');
 
-Promise.all([
-  faceapi.nets.tinyFaceDetector.loadFromUri('/checkin/models'),
-  faceapi.nets.faceRecognitionNet.loadFromUri('/checkin/models'),
-  faceapi.nets.faceLandmark68Net.loadFromUri('/checkin/models')
-]).then(startVideo);
-
-function startVideo() {
-  navigator.mediaDevices.getUserMedia({ video: {} })
-    .then(stream => video.srcObject = stream)
-    .catch(err => console.error(err));
+// Khởi động webcam
+async function startVideo() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+    video.srcObject = stream;
+  } catch (err) {
+    statusDiv.innerText = "Không thể truy cập camera: " + err.message;
+  }
 }
 
-video.addEventListener('play', async () => {
-  const displaySize = { width: video.width, height: video.height };
+async function loadModels() {
+  statusDiv.innerText = "Đang tải mô hình...";
+  await faceapi.nets.tinyFaceDetector.loadFromUri('./model');
+  await faceapi.nets.faceLandmark68Net.loadFromUri('./model');
+  await faceapi.nets.faceRecognitionNet.loadFromUri('./model');
+  statusDiv.innerText = "Đã tải xong mô hình!";
+  startVideo();
+}
+
+video.addEventListener('play', () => {
   const canvas = faceapi.createCanvasFromMedia(video);
   document.body.append(canvas);
+  const displaySize = { width: video.width, height: video.height };
   faceapi.matchDimensions(canvas, displaySize);
 
-  document.getElementById('status').textContent = "Nhận diện khuôn mặt đang hoạt động...";
+  setInterval(async () => {
+    const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions());
+    const resizedDetections = faceapi.resizeResults(detections, displaySize);
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    faceapi.draw.drawDetections(canvas, resizedDetections);
+  }, 100);
 });
+
+loadModels();
