@@ -64,7 +64,7 @@ video.addEventListener('play', async () => {
   statusDiv.innerText = '✅ Đã tải dữ liệu khuôn mặt. Hệ thống đang nhận diện...';
 
   // Khởi tạo FaceMatcher (độ chính xác: 0.6 càng thấp càng khắt khe)
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6);
+  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.8);
 
   // Tạo canvas để hiển thị khung nhận diện
   const canvas = faceapi.createCanvasFromMedia(video);
@@ -100,3 +100,4 @@ video.addEventListener('play', async () => {
     });
   }, 1000);
 });
+
