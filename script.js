@@ -23,7 +23,7 @@ function startVideo() {
 video.addEventListener('play', async () => {
   statusDiv.innerText = 'Đang tải dữ liệu khuôn mặt...';
 
-  const labels = ['Nguyen_Tuan_Anh', 'tran_b']; // Tên file trong /known_faces (không cần .jpg)
+  const labels = ['nguyen_tuan_anh', 'tran_b']; // Tên file trong /known_faces (không cần .jpg)
   const labeledFaceDescriptors = await Promise.all(
     labels.map(async label => {
       const img = await faceapi.fetchImage(`./known_faces/${label}.jpg`);
@@ -63,6 +63,7 @@ video.addEventListener('play', async () => {
     });
   }, 1000);
 });
+
 
 
 
