@@ -17,7 +17,7 @@ Promise.all([
 // === HÀM KHỞI ĐỘNG CAMERA ===
 function startVideo() {
   navigator.mediaDevices
-    .getUserMedia({ video: { facingMode: "user" } }) // camera trước
+    .getUserMedia({ video: { facingMode: "environment" } }) // camera trước
     .then(stream => {
       video.srcObject = stream;
     })
@@ -100,5 +100,6 @@ video.addEventListener('play', async () => {
     });
   }, 1000);
 });
+
 
 
