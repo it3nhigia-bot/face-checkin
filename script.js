@@ -13,7 +13,11 @@ Promise.all([
 function startVideo() {
   navigator.mediaDevices.getUserMedia({ video: {} })
     .then(stream => video.srcObject = stream)
-    .catch(err => statusDiv.innerText = `Lỗi camera: ${err}`);
+    .catch(err => {
+  statusDiv.innerText = `⚠️ Không thể truy cập camera: ${err.message}`;
+  alert("Hãy bật quyền truy cập camera trong trình duyệt để tiếp tục.");
+});
+
 }
 
 video.addEventListener('play', async () => {
@@ -59,5 +63,6 @@ video.addEventListener('play', async () => {
     });
   }, 1000);
 });
+
 
 
