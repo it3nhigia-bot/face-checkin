@@ -33,7 +33,7 @@ video.addEventListener('play', async () => {
   statusDiv.innerText = '🔍 Đang tải dữ liệu khuôn mặt...';
 
   // Danh sách người cần nhận diện (tên file phải trùng trong /known_faces/)
-  const labels = ['nguyen_tuan_anh', 'tran_b'];
+  const labels = ['nguyen_tuan_anh', 'nguyen_b'];
 
   // Tải dữ liệu khuôn mặt đã biết
   const labeledFaceDescriptors = await Promise.all(
@@ -100,6 +100,7 @@ video.addEventListener('play', async () => {
     });
   }, 1000);
 });
+
 
 
 
