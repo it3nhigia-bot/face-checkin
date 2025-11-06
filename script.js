@@ -17,14 +17,14 @@ Promise.all([
 // === HÀM KHỞI ĐỘNG CAMERA ===
 function startVideo() {
   navigator.mediaDevices
-    .getUserMedia({ video: {} })
+    .getUserMedia({ video: { facingMode: "user" } }) // camera trước
     .then(stream => {
       video.srcObject = stream;
     })
     .catch(err => {
       console.error("Camera error:", err);
-      statusDiv.innerText = `⚠️ Không thể truy cập camera: ${err.message}`;
-      alert("Hãy bật quyền truy cập camera trong trình duyệt để tiếp tục!");
+      statusDiv.innerText = `⚠️ Lỗi mở camera: ${err.message}`;
+      alert("Không thể truy cập camera. Vui lòng kiểm tra quyền trình duyệt!");
     });
 }
 
@@ -100,4 +100,5 @@ video.addEventListener('play', async () => {
     });
   }, 1000);
 });
+
 
